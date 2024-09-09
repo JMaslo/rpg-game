@@ -1,6 +1,8 @@
 package cz.jmaslo;
 
 import cz.jmaslo.gameWindow.GameWindow;
+import cz.jmaslo.gameWindow.Key;
+import cz.jmaslo.gameWindow.Renderer;
 
 public class RpgGame extends GameWindow {
 
