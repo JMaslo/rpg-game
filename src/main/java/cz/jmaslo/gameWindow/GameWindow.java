@@ -180,16 +180,13 @@ public class GameWindow {
                 g.drawString("FPS: %.2f".formatted(fps), 0, 10);
             }
 
-
             for (int y = 0;y < MAP_HEIGHT; y++) {
                 for (int x = 0; x < MAP_WIDTH; x++) {
-
                     if (map[y][x] == 0) {
                         g.setColor(Color.GREEN);
                     } else {
                         g.setColor(new Color(139, 69, 19));
                     }
-//                    g.setColor(Color.GREEN);
                     g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
                 }
             }
