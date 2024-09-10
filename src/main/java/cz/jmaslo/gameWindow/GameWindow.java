@@ -24,23 +24,7 @@ public class GameWindow {
     private final boolean[] lastKeyState = new boolean[Key.values().length];
     private final boolean[] keyState = new boolean[Key.values().length];
 
-    private static final int TILE_SIZE = 54;
-    private static final int MAP_WIDTH = 11;
-    private static final int MAP_HEIGHT = 11;
 
-    private final int[][] map = {
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
-            {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1},
-            {1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1},
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
-    };
 
     /**
      * Creates a new game window. The window is not visible until the {@link #run()} method is called.
@@ -178,17 +162,6 @@ public class GameWindow {
             if (showFps) {
                 g.setColor(Color.WHITE);
                 g.drawString("FPS: %.2f".formatted(fps), 0, 10);
-            }
-
-            for (int y = 0;y < MAP_HEIGHT; y++) {
-                for (int x = 0; x < MAP_WIDTH; x++) {
-                    if (map[y][x] == 0) {
-                        g.setColor(Color.GREEN);
-                    } else {
-                        g.setColor(new Color(139, 69, 19));
-                    }
-                    g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
-                }
             }
         }
     }
