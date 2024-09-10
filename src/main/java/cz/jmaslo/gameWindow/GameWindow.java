@@ -1,11 +1,18 @@
 package cz.jmaslo.gameWindow;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
 
 
+/**
+ * Game window with a simple game loop. To create a game, extend this class and implement the {@link #update(double)}
+ * and {@link #render(Renderer)} methods. The game loop calls these methods every frame. The window is not visible
+ * until the {@link #run()} method is called.
+ */
 public class GameWindow {
     private final int width;
     private final int height;
@@ -121,31 +128,18 @@ public class GameWindow {
     }
 
     /**
-     * Rendering context for drawing shapes.
+     * Loads an image from the specified file.
+     * Any errors are rethrown as {@link RuntimeException}.
+     * @param path path to the image file
+     * @return loaded image
+     * @see Renderer#drawImage(Image, int, int, int, int, int, int)
      */
-    public static final class Renderer {
-        private final Graphics g;
-
-        private Renderer(Graphics g) {
-            this.g = g;
+    public Image loadTexture(String path) {
+        try {
+            return new Image(ImageIO.read(new File(path)));
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to load texture: " + path, e);
         }
-
-        /**
-         * Draws a filled rectangle.
-         * @param x x-coordinate of the top-left corner
-         * @param y y-coordinate of the top-left corner
-         * @param width rectangle width
-         * @param height rectangle height
-         * @param color RGB color as an integer (0xRRGGBB), similar to CSS colors
-         */
-        public void fillRect(int x, int y, int width, int height, int color) {
-            g.setColor(new Color(color));
-            g.fillRect(x, y, width, height);
-        }
-    }
-
-    public enum Key {
-        W, S, A, D, F
     }
 
     private void start() {
