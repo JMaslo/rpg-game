@@ -9,7 +9,7 @@ import java.awt.*;
 public class RpgGame extends GameWindow {
 
     private static final double SPEED = 750;
-    private static final int SIZE = 30;
+    private static final int SIZE = 54;
 
     double PlayerY = 100;
     double PlayerX = 100;
@@ -52,13 +52,13 @@ public class RpgGame extends GameWindow {
     @Override
     public void update(double delta) {
 
-        if (isKeyPressed(Key.W)) {PlayerY = PlayerY - SPEED * delta;}
+        if (isKeyPressed(Key.W)) {PlayerY = PlayerY - TILE_SIZE;}
 
-        if (isKeyPressed(Key.S)) {PlayerY = PlayerY + SPEED * delta;}
+        if (isKeyPressed(Key.S)) {PlayerY = PlayerY + TILE_SIZE;}
 
-        if (isKeyPressed(Key.A)) {PlayerX = PlayerX - SPEED * delta;}
+        if (isKeyPressed(Key.A)) {PlayerX = PlayerX - TILE_SIZE;}
 
-        if (isKeyPressed(Key.D)) {PlayerX = PlayerX + SPEED * delta;}
+        if (isKeyPressed(Key.D)) {PlayerX = PlayerX + TILE_SIZE;}
     }
     public static void main(String[] args) {
         new RpgGame().run();
