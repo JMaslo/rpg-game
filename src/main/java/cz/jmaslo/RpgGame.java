@@ -8,10 +8,8 @@ import java.awt.*;
 
 public class RpgGame extends GameWindow {
 
-    private static final double SPEED = 500;
-    private static final int SIZE = 20;
-
-    public Graphics g;
+    private static final double SPEED = 750;
+    private static final int SIZE = 30;
 
     double PlayerY = 100;
     double PlayerX = 100;
@@ -34,11 +32,11 @@ public class RpgGame extends GameWindow {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
     };
 
-    private RpgGame() {super(800, 600, "Demo");}
+    private RpgGame() {super(800, 600, "RPG Game");}
 
     @Override
     public void render(Renderer r) {
-        r.fillRect((int) PlayerX, (int) PlayerY, SIZE, SIZE, 0x80e0f0);
+
         for (int y = 0;y < MAP_HEIGHT; y++) {
             for (int x = 0; x < MAP_WIDTH; x++) {
                 if (map[y][x] == 0) {
@@ -48,6 +46,7 @@ public class RpgGame extends GameWindow {
                 }
             }
         }
+        r.fillRect((int) PlayerX, (int) PlayerY, SIZE, SIZE, Color.RED.getRGB());
     }
 
     @Override
