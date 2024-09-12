@@ -18,6 +18,8 @@ public class RpgGame extends GameWindow {
     private static final int MAP_WIDTH = 11;
     private static final int MAP_HEIGHT = 11;
 
+
+
     private final int[][] map = {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -76,11 +78,21 @@ public class RpgGame extends GameWindow {
         PlayerX = newPlayerX;
         PlayerY = newPlayerY;
 
-//        checkWallCollision();
         playerMove();
+//        checkWallCollision();
     }
 
     public void checkWallCollision() {
+
+        // Check if there is a collision
+        // When player would like to go throw the wall, it will send him back to his last position
+
+        for (int i = 0; i < MAP_HEIGHT; i++) {
+            for (int j = 0; j < MAP_HEIGHT; j++) {
+
+            }
+        }
+
 
     }
 
@@ -90,7 +102,6 @@ public class RpgGame extends GameWindow {
 
         for (int i = 0; i < MAP_HEIGHT; i++) {
             for (int j = 0; j < MAP_WIDTH; j++) {
-                if (map[i][j] == 1) {
                     Rectangle wallBox = new Rectangle(j * TILE_SIZE, i * TILE_SIZE, TILE_SIZE, TILE_SIZE);
                     if (playerBox.intersects(wallBox)) {
                         if (playerBox.x < wallBox.x) {
@@ -106,7 +117,6 @@ public class RpgGame extends GameWindow {
                             PlayerY = wallBox.y + TILE_SIZE;
                         }
                     }
-                }
             }
         }
 
