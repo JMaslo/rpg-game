@@ -76,10 +76,15 @@ public class RpgGame extends GameWindow {
         PlayerX = newPlayerX;
         PlayerY = newPlayerY;
 
-        checkWallCollision();
+//        checkWallCollision();
+        playerMove();
     }
 
     public void checkWallCollision() {
+
+    }
+
+    public void playerMove() {
 
         Rectangle playerBox = new Rectangle((int) PlayerX, (int) PlayerY, TILE_SIZE, TILE_SIZE);
 
@@ -104,6 +109,7 @@ public class RpgGame extends GameWindow {
                 }
             }
         }
+
     }
     public static void main(String[] args) {
         new RpgGame().run();
