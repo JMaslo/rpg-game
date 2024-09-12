@@ -32,7 +32,9 @@ public class RpgGame extends GameWindow {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
     };
 
-    private RpgGame() {super(800, 600, "RPG Game");}
+    private RpgGame() {
+        super(800, 600, "RPG Game");
+    }
 
     @Override
     public void render(Renderer r) {
@@ -52,13 +54,56 @@ public class RpgGame extends GameWindow {
     @Override
     public void update(double delta) {
 
-        if (isKeyPressed(Key.W)) {PlayerY = PlayerY - TILE_SIZE;}
+        double moveX = 0;
+        double moveY = 0;
 
-        if (isKeyPressed(Key.S)) {PlayerY = PlayerY + TILE_SIZE;}
+        if (isKeyPressed(Key.W)) {
+            moveY -= TILE_SIZE;
+        }
+        if (isKeyPressed(Key.S)) {
+            moveY += TILE_SIZE;
+        }
+        if (isKeyPressed(Key.A)) {
+            moveX -= TILE_SIZE;
+        }
+        if (isKeyPressed(Key.D)) {
+            moveX += TILE_SIZE;
+        }
 
-        if (isKeyPressed(Key.A)) {PlayerX = PlayerX - TILE_SIZE;}
+        double newPlayerX = PlayerX + moveX;
+        double newPlayerY = PlayerY + moveY;
 
-        if (isKeyPressed(Key.D)) {PlayerX = PlayerX + TILE_SIZE;}
+        PlayerX = newPlayerX;
+        PlayerY = newPlayerY;
+
+        checkWallCollision();
+    }
+
+    public void checkWallCollision() {
+
+        Rectangle playerBox = new Rectangle((int) PlayerX, (int) PlayerY, TILE_SIZE, TILE_SIZE);
+
+        for (int i = 0; i < MAP_HEIGHT; i++) {
+            for (int j = 0; j < MAP_WIDTH; j++) {
+                if (map[i][j] == 1) {
+                    Rectangle wallBox = new Rectangle(j * TILE_SIZE, i * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+                    if (playerBox.intersects(wallBox)) {
+                        if (playerBox.x < wallBox.x) {
+                            PlayerX = wallBox.x - TILE_SIZE;
+                        }
+                        if (playerBox.x + TILE_SIZE > wallBox.x + TILE_SIZE) {
+                            PlayerX = wallBox.x + TILE_SIZE;
+                        }
+                        if (playerBox.y < wallBox.y) {
+                            PlayerY = wallBox.y - TILE_SIZE;
+                        }
+                        if (playerBox.y + TILE_SIZE > wallBox.y + TILE_SIZE) {
+                            PlayerY = wallBox.y + TILE_SIZE;
+                        }
+                    }
+                }
+            }
+        }
     }
     public static void main(String[] args) {
         new RpgGame().run();
