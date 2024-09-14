@@ -5,6 +5,10 @@ import cz.jmaslo.gameWindow.Key;
 import cz.jmaslo.gameWindow.Renderer;
 
 import java.awt.*;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
 
 public class RpgGame extends GameWindow {
 
@@ -15,22 +19,24 @@ public class RpgGame extends GameWindow {
     private static final int MAP_WIDTH = 11;
     private static final int MAP_HEIGHT = 11;
 
-    private final int[][] map = {
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
-            {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1},
-            {1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1},
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
-    };
 
-    private RpgGame() {
+
+    private int[][] map;
+
+    String filename = "files/map.txt";
+    File file = new File(filename);
+
+
+    private RpgGame() throws IOException {
         super(800, 600, "RPG Game");
+        map = readMapFromFile(filename);
+    }
+
+    private int[][] readMapFromFile(String filePath) throws IOException {
+        return Files.lines(Paths.get(filePath))
+                .map(line -> line.split(", "))
+                .map(values -> Arrays.stream(values).mapToInt(Integer::parseInt).toArray())
+                .toArray(int[][]::new);
     }
 
     @Override
@@ -46,6 +52,8 @@ public class RpgGame extends GameWindow {
         }
         r.fillRect(playerX * TILE_SIZE, playerY * TILE_SIZE, TILE_SIZE, TILE_SIZE, Color.RED.getRGB());
     }
+
+
 
     @Override
     public void update(double delta) {
@@ -72,7 +80,7 @@ public class RpgGame extends GameWindow {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         new RpgGame().run();
     }
 }
