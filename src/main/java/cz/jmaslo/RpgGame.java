@@ -21,10 +21,9 @@ public class RpgGame extends GameWindow {
 
 
 
-    private int[][] map;
+    private final int[][] map;
 
     String filename = "files/map.txt";
-    File file = new File(filename);
 
 
     private RpgGame() throws IOException {
