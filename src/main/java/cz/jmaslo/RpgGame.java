@@ -1,5 +1,6 @@
 package cz.jmaslo;
 
+import cz.jmaslo.gameWindow.Color;
 import cz.jmaslo.gameWindow.GameWindow;
 import cz.jmaslo.gameWindow.Key;
 import cz.jmaslo.gameWindow.Renderer;

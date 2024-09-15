@@ -41,7 +41,7 @@ public final class Renderer {
      * @param color RGB color as an integer (0xRRGGBB), similar to CSS colors
      */
     public void fillRect(int x, int y, int width, int height, int color) {
-        g.setColor(new Color(color));
+        g.setColor(new java.awt.Color(color));
         g.fillRect(x + x0, y + y0, width, height);
     }
 

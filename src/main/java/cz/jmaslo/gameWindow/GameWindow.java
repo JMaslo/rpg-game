@@ -102,7 +102,7 @@ public class GameWindow {
         mainFrame.getContentPane().add(new Canvas());
         mainFrame.pack();
         mainFrame.setVisible(true);
-        mainFrame.setBackground(Color.BLACK);
+        mainFrame.setBackground(java.awt.Color.BLACK);
         mainFrame.addKeyListener(new KeyboardHandler());
         lastFrameTime = System.nanoTime();
         new Timer(15, e -> {
@@ -129,7 +129,7 @@ public class GameWindow {
         protected void paintComponent(Graphics g) {
             render(new Renderer(g));
             if (showFps) {
-                g.setColor(Color.WHITE);
+                g.setColor(java.awt.Color.WHITE);
                 g.drawString("FPS: %.2f".formatted(fps), 0, 10);
             }
         }
