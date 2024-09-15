@@ -2,10 +2,11 @@ package cz.jmaslo;
 
 import cz.jmaslo.gameWindow.Color;
 import cz.jmaslo.gameWindow.GameWindow;
+import cz.jmaslo.gameWindow.Image;
 import cz.jmaslo.gameWindow.Key;
 import cz.jmaslo.gameWindow.Renderer;
+import cz.jmaslo.gameWindow.SpriteSheet;
 
-import java.awt.*;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -14,6 +15,8 @@ import java.util.Arrays;
 import static cz.jmaslo.gameWindow.Input.isKeyPressed;
 
 public class RpgGame extends GameWindow {
+
+    private static final SpriteSheet heart = Image.load("files/heart.png", 2).getSpriteSheet(32);
 
     private int playerY = 5;
     private int playerX = 5;
@@ -53,6 +56,8 @@ public class RpgGame extends GameWindow {
             }
         }
         r.fillRect(playerX * TILE_SIZE, playerY * TILE_SIZE, TILE_SIZE, TILE_SIZE, Color.RED.getRGB());
+        r.drawSprite(heart.getSprite(4), 600, 200);
+        r.drawSprite(heart.getSprite(2), 632, 200);
     }
 
 
