@@ -7,9 +7,28 @@ import java.awt.*;
  */
 public final class Renderer {
     private final Graphics g;
+    private final int x0;
+    private final int y0;
 
     Renderer(Graphics g) {
+        this(g, 0, 0);
+    }
+
+    Renderer(Graphics g, int x0, int y0) {
         this.g = g;
+        this.x0 = x0;
+        this.y0 = y0;
+    }
+
+    /**
+     * Translates the rendering context by the specified amount.
+     *
+     * @param x x-coordinate translation
+     * @param y y-coordinate translation
+     * @return new rendering context
+     */
+    public Renderer translate(int x, int y) {
+        return new Renderer(g, x0 + x, y0 + y);
     }
 
     /**
@@ -23,7 +42,7 @@ public final class Renderer {
      */
     public void fillRect(int x, int y, int width, int height, int color) {
         g.setColor(new Color(color));
-        g.fillRect(x, y, width, height);
+        g.fillRect(x + x0, y + y0, width, height);
     }
 
     /**
@@ -34,7 +53,7 @@ public final class Renderer {
      * @param dstY y-coordinate of the top-left corner of the destination rectangle on the canvas
      */
     public void drawImage(Image image, int dstX, int dstY) {
-        g.drawImage(image.image, dstX, dstY, null);
+        g.drawImage(image.image, dstX + x0, dstY + y0, null);
     }
 
     /**
@@ -49,6 +68,17 @@ public final class Renderer {
      * @param height height of the rectangle to draw
      */
     public void drawImage(Image image, int dstX, int dstY, int srcX, int srcY, int width, int height) {
-        g.drawImage(image.image, dstX, dstY, dstX + width, dstY + height, srcX, srcY, srcX + width, srcY + height, null);
+        g.drawImage(image.image, dstX + x0, dstY + y0, dstX + width + x0, dstY + height + y0, srcX, srcY, srcX + width, srcY + height, null);
+    }
+
+    /**
+     * Draws a sprite.
+     *
+     * @param sprite sprite to draw
+     * @param x x-coordinate of the top-left corner of the destination rectangle on the canvas
+     * @param y y-coordinate of the top-left corner of the destination rectangle on the canvas
+     */
+    public void drawSprite(Sprite sprite, int x, int y) {
+        drawImage(sprite.image, x, y, sprite.x, sprite.y, sprite.width, sprite.height);
     }
 }

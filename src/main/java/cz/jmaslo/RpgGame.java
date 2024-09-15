@@ -10,6 +10,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
+import static cz.jmaslo.gameWindow.Input.isKeyPressed;
+
 public class RpgGame extends GameWindow {
 
     private int playerY = 5;
